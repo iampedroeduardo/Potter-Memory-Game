@@ -18,8 +18,8 @@ function Imagem(linha,coluna){
     if(img==null){
         img= new Image();
         img.src="Imagens/"+tab[linha][coluna]+".jpg";
-        img.style.width="50px";
-        img.style.height="50px";
+        img.style.width="100px";
+        img.style.height="100px";
         img.style.margin="0px"
         img.id="1"+linha+coluna;
         td=document.getElementById(""+linha+coluna);
