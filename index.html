@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Jogo da Memória</title>
+</head>
+<body>
+    <h1>Potter Memory Game</h1>
+    <table>
+        <tbody>
+            <tr>
+                <td onclick="escolhidos.push([0,0]);Imagem(0,0);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="00"></td>
+                <td onclick="escolhidos.push([0,1]);Imagem(0,1);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="01"></td>
+                <td onclick="escolhidos.push([0,2]);Imagem(0,2);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="02"></td>
+                <td onclick="escolhidos.push([0,3]);Imagem(0,3);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="03"></td>
+            </tr>
+            <tr>
+                <td onclick="escolhidos.push([1,0]);Imagem(1,0);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="10"></td>
+                <td onclick="escolhidos.push([1,1]);Imagem(1,1);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="11"></td>
+                <td onclick="escolhidos.push([1,2]);Imagem(1,2);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="12"></td>
+                <td onclick="escolhidos.push([1,3]);Imagem(1,3);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="13"></td>
+            </tr>
+            <tr>
+                <td onclick="escolhidos.push([2,0]);Imagem(2,0);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="20"></td>
+                <td onclick="escolhidos.push([2,1]);Imagem(2,1);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="21"></td>
+                <td onclick="escolhidos.push([2,2]);Imagem(2,2);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="22"></td>
+                <td onclick="escolhidos.push([2,3]);Imagem(2,3);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="23"></td>
+            </tr>
+            <tr>
+                <td onclick="escolhidos.push([3,0]);Imagem(3,0);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="30"></td>
+                <td onclick="escolhidos.push([3,1]);Imagem(3,1);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="31"></td>
+                <td onclick="escolhidos.push([3,2]);Imagem(3,2);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="32"></td>
+                <td onclick="escolhidos.push([3,3]);Imagem(3,3);if(escolhidos.length%2==0){setTimeout(()=>{Testa();},750);}" id="33"></td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="jogodamemoria.js"></script>
+</body>
+</html>
