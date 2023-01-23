@@ -27,17 +27,20 @@ function Imagem(linha,coluna){
     }
 }
 function Testa(){
-    if(tab[escolhidos[escolhidos.length-1][0]][escolhidos[escolhidos.length-1][1]]==tab[escolhidos[escolhidos.length-2][0]][escolhidos[escolhidos.length-2][1]]){
-        jogador+=1;
-        td=document.getElementById(""+escolhidos[escolhidos.length-1][0]+escolhidos[escolhidos.length-1][1]);
+    lin1=escolhidos[escolhidos.length-1][0];
+    col1=escolhidos[escolhidos.length-1][1];
+    lin2=escolhidos[escolhidos.length-2][0];
+    col2=escolhidos[escolhidos.length-2][1];
+    if(tab[lin1][col1]==tab[lin2][col2]){
+        td=document.getElementById(""+lin1+col1);
         td.removeAttribute("onclick");
-        td2=document.getElementById(""+escolhidos[escolhidos.length-2][0]+escolhidos[escolhidos.length-2][1]);
+        td2=document.getElementById(""+lin2+col2);
         td2.removeAttribute("onclick");
     }
     else{
         setTimeout(()=>{
-            img1=document.getElementById("1"+escolhidos[escolhidos.length-1][0]+escolhidos[escolhidos.length-1][1]);
-            img2=document.getElementById("1"+escolhidos[escolhidos.length-2][0]+escolhidos[escolhidos.length-2][1]);
+            img1=document.getElementById("1"+lin1+col1);
+            img2=document.getElementById("1"+lin2+col2);
             img1.parentNode.removeChild(img1);
             img2.parentNode.removeChild(img2);
         },1000);
