@@ -36,6 +36,7 @@ function Testa(){
         posicoes.splice(pos,1);
         pos=posicoes.indexOf([lin2,col2]);
         posicoes.splice(pos,1);
+        ColocaOnclick();
     }
     else{
         setTimeout(()=>{
