@@ -35,10 +35,12 @@ function Testa(){
         td2.removeAttribute("onclick");
     }
     else{
-        img1=document.getElementById("1"+escolhidos[escolhidos.length-1][0]+escolhidos[escolhidos.length-1][1]);
-        img2=document.getElementById("1"+escolhidos[escolhidos.length-2][0]+escolhidos[escolhidos.length-2][1]);
-        img1.parentNode.removeChild(img1);
-        img2.parentNode.removeChild(img2);
+        setTimeout(()=>{
+            img1=document.getElementById("1"+escolhidos[escolhidos.length-1][0]+escolhidos[escolhidos.length-1][1]);
+            img2=document.getElementById("1"+escolhidos[escolhidos.length-2][0]+escolhidos[escolhidos.length-2][1]);
+            img1.parentNode.removeChild(img1);
+            img2.parentNode.removeChild(img2);
+        },1000);
     }
     if(TestaTudo()==false){
         tela=[
