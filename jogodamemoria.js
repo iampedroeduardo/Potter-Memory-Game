@@ -1,9 +1,16 @@
-function SorteiaTab(){
-    fotos=["harry","rony","hermione","luna","ginny","dumbledore","draco","hagrid"];
+function SorteiaTab(nivel){
+    if(nivel==1){
+        fotos=["harry","rony","hermione","luna","ginny","draco"];
+        linhas=3;
+    }
+    else if(nivel==2){
+        fotos=["harry","rony","hermione","luna","ginny","dumbledore","draco","hagrid"];
+        linhas=4;
+    }
     fotos2=fotos;
     fotos=fotos.concat(fotos2)
     console.log(fotos);
-    for(c=0;c<4;c++){
+    for(c=0;c<linhas;c++){
         tab.push([]);
         for(i=0;i<4;i++){
             n=Math.floor(Math.random()*fotos.length);
@@ -11,7 +18,19 @@ function SorteiaTab(){
             fotos.splice(n,1);
         }
     }
-    console.log(tab);
+    tabuleiro=document.getElementById("tabuleiro");
+    for(c=0;c<linhas;c++){
+        tr=document.createElement("tr");
+        tr.id=""+c;
+        tabuleiro.appendChild(tr);
+        for(i=0;i<4;i++){
+            td=document.createElement("td");
+            td.id=""+c+i;
+            tr.appendChild(td);
+        }
+        console.log(tabuleiro);
+    }
+    ColocaOnclick();
 }
 function Imagem(linha,coluna){
     img=document.getElementById("1"+linha+coluna);
@@ -61,7 +80,7 @@ function Testa(){
 }
 function TestaTudo(){
     tof=false
-    for(c=0;c<4;c++){
+    for(c=0;c<linhas;c++){
         for(i=0;i<4;i++){
             img=document.getElementById("1"+c+i);
             if(img==null){
@@ -72,7 +91,7 @@ function TestaTudo(){
     return tof
 }
 function TiraOnclick(){
-    for(c=0;c<4;c++){
+    for(c=0;c<linhas;c++){
         for(i=0;i<4;i++){
             td=document.getElementById(""+c+i);
             td.removeAttribute("onclick");
@@ -87,18 +106,26 @@ function ColocaOnclick(){
         console.log(col);
         td=document.getElementById(""+lin+col);
         on="escolhidos.push(["+lin+","+col+"]);Imagem("+lin+","+col+");if(escolhidos.length%2==0){TiraOnclick();Testa();}"
-        console.log(td.setAttribute("onclick",on));
-        console.log(td);
-    }
-    console.log(posicoes);
-    console.log("foi");
-}
-var tab=[], escolhidos=[], posicoes=[];
-for(c=0;c<4;c++){
-    for(i=0;i<4;i++){
-        posicoes.push(""+c+i);
+        td.setAttribute("onclick",on)
     }
 }
-SorteiaTab();
-console.log(posicoes);
-console.log(tab);
+function GeraPosicoes(linhas){
+    for(c=0;c<linhas;c++){
+        for(i=0;i<4;i++){
+            posicoes.push(""+c+i);
+        }
+    }
+}
+function GeraTab(){
+    if(document.querySelector('input[name="dificuldade"]:checked').value=="facil"){
+        GeraPosicoes(3);
+        SorteiaTab(1);
+        linhas=3;
+    }
+    else if(document.querySelector('input[name="dificuldade"]:checked').value=="medio"){
+        GeraPosicoes(4);
+        SorteiaTab(2);
+        linhas=4;
+    }
+}
+var tab=[], escolhidos=[], posicoes=[], linhas;
