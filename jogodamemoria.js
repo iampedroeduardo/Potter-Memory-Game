@@ -1,12 +1,15 @@
 function SorteiaTab(){
     if(nivel==1){
-        fotos=["harry","rony","hermione","luna","ginny","draco"];
+        for(c=0;c<12;c++){
+            n=Math.floor(Math.random()*fotos.length);
+            fotos.splice(n,1);
+        }
     }
     else if(nivel==2){
-        fotos=["harry","rony","hermione","luna","ginny","dumbledore","draco","hagrid"];
-    }
-    else if(nivel==3){
-        fotos=["harry","rony","hermione","luna","ginny","dumbledore","draco","hagrid","snape","sirius","jameslily","fredgeorge","remus","voldemort","neville","minerva","dobby","tonks"];
+        for(c=0;c<10;c++){
+            n=Math.floor(Math.random()*fotos.length);
+            fotos.splice(n,1);
+        }
     }
     fotos2=fotos;
     fotos=fotos.concat(fotos2)
@@ -30,6 +33,14 @@ function SorteiaTab(){
             td.style.height=resol;
             td.style.width=resol;
             tr.appendChild(td);
+            img= new Image();
+            img.src="Imagens/"+tab[c][i]+".jpg";
+            img.style.width=resol;
+            img.style.height=resol;
+            img.style.margin="0px";
+            img.style.opacity="0.0";
+            img.id="1"+c+i;
+            td.appendChild(img);
         }
         console.log(tabuleiro);
     }
@@ -37,16 +48,7 @@ function SorteiaTab(){
 }
 function Imagem(linha,coluna){
     img=document.getElementById("1"+linha+coluna);
-    if(img==null){
-        img= new Image();
-        img.src="Imagens/"+tab[linha][coluna]+".jpg";
-        img.style.width=resol;
-        img.style.height=resol;
-        img.style.margin="0px"
-        img.id="1"+linha+coluna;
-        td=document.getElementById(""+linha+coluna);
-        td.appendChild(img);
-    }
+    img.style.opacity="1.0";
 }
 function Testa(){
     lin1=escolhidos[escolhidos.length-1][0];
@@ -64,11 +66,13 @@ function Testa(){
         setTimeout(()=>{
             img1=document.getElementById("1"+lin1+col1);
             img2=document.getElementById("1"+lin2+col2);
-            img1.parentNode.removeChild(img1);
-            img2.parentNode.removeChild(img2);
+            console.log(img1);
+            img1.style.opacity="0.0";
+            img2.style.opacity="0.0";
             ColocaOnclick();
         },1000);
     }
+    console.log(TestaTudo());
     if(TestaTudo()==false){
         tela=[
             '<div class="container">',
@@ -86,7 +90,7 @@ function TestaTudo(){
     for(c=0;c<linhas;c++){
         for(i=0;i<colunas;i++){
             img=document.getElementById("1"+c+i);
-            if(img==null){
+            if(img.style.opacity=="0"){
                 tof=true
             }
         }
@@ -105,8 +109,6 @@ function ColocaOnclick(){
     for(c=0;c<posicoes.length;c++){
         lin=posicoes[c][0];
         col=posicoes[c][1];
-        console.log(lin);
-        console.log(col);
         td=document.getElementById(""+lin+col);
         on="escolhidos.push(["+lin+","+col+"]);Imagem("+lin+","+col+");if(escolhidos.length%2==0){TiraOnclick();Testa();}"
         td.setAttribute("onclick",on)
@@ -128,15 +130,4 @@ function TirarRadio(){
     div=document.getElementById("dificuldade");
     div.parentNode.removeChild(div);
 }
-function GeraBotao(){
-    tag=document.createElement("a")
-    tag.setAttribute("href","index.html");
-    botao=document.createElement("button");
-    texto=document.createTextNode("Jogar")
-    botao.appendChild(texto);
-    botao.setAttribute("onclick","GeraTab()");
-    tag.appendChild(botao);
-    body=document.querySelector("body");
-    body.appendChild(tag);
-}
-var tab=[], escolhidos=[], posicoes=[], nivel, linhas, resol, colunas=4;
+var tab=[], escolhidos=[], posicoes=[], nivel, linhas, resol, colunas=4, fotos=["harry","rony","hermione","luna","ginny","dumbledore","draco","hagrid","snape","sirius","jameslily","fredgeorge","remus","voldemort","neville","minerva","dobby","tonks"];
