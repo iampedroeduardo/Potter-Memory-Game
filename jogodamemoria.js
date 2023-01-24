@@ -1,18 +1,19 @@
-function SorteiaTab(nivel){
+function SorteiaTab(){
     if(nivel==1){
         fotos=["harry","rony","hermione","luna","ginny","draco"];
-        linhas=3;
     }
     else if(nivel==2){
         fotos=["harry","rony","hermione","luna","ginny","dumbledore","draco","hagrid"];
-        linhas=4;
+    }
+    else if(nivel==3){
+        fotos=["harry","rony","hermione","luna","ginny","dumbledore","draco","hagrid","snape","sirius","jameslily","fredgeorge","remus","voldemort","neville","minerva","dobby","tonks"];
     }
     fotos2=fotos;
     fotos=fotos.concat(fotos2)
     console.log(fotos);
     for(c=0;c<linhas;c++){
         tab.push([]);
-        for(i=0;i<4;i++){
+        for(i=0;i<colunas;i++){
             n=Math.floor(Math.random()*fotos.length);
             tab[c][i]=fotos[n];
             fotos.splice(n,1);
@@ -23,9 +24,11 @@ function SorteiaTab(nivel){
         tr=document.createElement("tr");
         tr.id=""+c;
         tabuleiro.appendChild(tr);
-        for(i=0;i<4;i++){
+        for(i=0;i<colunas;i++){
             td=document.createElement("td");
             td.id=""+c+i;
+            td.style.height=resol;
+            td.style.width=resol;
             tr.appendChild(td);
         }
         console.log(tabuleiro);
@@ -37,8 +40,8 @@ function Imagem(linha,coluna){
     if(img==null){
         img= new Image();
         img.src="Imagens/"+tab[linha][coluna]+".jpg";
-        img.style.width="82px";
-        img.style.height="82px";
+        img.style.width=resol;
+        img.style.height=resol;
         img.style.margin="0px"
         img.id="1"+linha+coluna;
         td=document.getElementById(""+linha+coluna);
@@ -71,7 +74,7 @@ function Testa(){
             '<div class="container">',
             '    <div class="box">',
             '        <h1>Meus Parabéns! Você ganhou!</h1>',
-            '        <button class="botao">Vamos lá!</button>',
+            '        <a href="index.html"><button class="botao">Jogar Novamente</button></a>',
             '    <div>',
             '</div>'
         ]
@@ -81,7 +84,7 @@ function Testa(){
 function TestaTudo(){
     tof=false
     for(c=0;c<linhas;c++){
-        for(i=0;i<4;i++){
+        for(i=0;i<colunas;i++){
             img=document.getElementById("1"+c+i);
             if(img==null){
                 tof=true
@@ -92,7 +95,7 @@ function TestaTudo(){
 }
 function TiraOnclick(){
     for(c=0;c<linhas;c++){
-        for(i=0;i<4;i++){
+        for(i=0;i<colunas;i++){
             td=document.getElementById(""+c+i);
             td.removeAttribute("onclick");
         }
@@ -109,23 +112,31 @@ function ColocaOnclick(){
         td.setAttribute("onclick",on)
     }
 }
-function GeraPosicoes(linhas){
+function GeraPosicoes(){
     for(c=0;c<linhas;c++){
-        for(i=0;i<4;i++){
+        for(i=0;i<colunas;i++){
             posicoes.push(""+c+i);
         }
     }
 }
 function GeraTab(){
-    if(document.querySelector('input[name="dificuldade"]:checked').value=="facil"){
-        GeraPosicoes(3);
-        SorteiaTab(1);
-        linhas=3;
-    }
-    else if(document.querySelector('input[name="dificuldade"]:checked').value=="medio"){
-        GeraPosicoes(4);
-        SorteiaTab(2);
-        linhas=4;
-    }
+    GeraPosicoes();
+    SorteiaTab();
+    TirarRadio();
 }
-var tab=[], escolhidos=[], posicoes=[], linhas;
+function TirarRadio(){
+    div=document.getElementById("dificuldade");
+    div.parentNode.removeChild(div);
+}
+function GeraBotao(){
+    tag=document.createElement("a")
+    tag.setAttribute("href","index.html");
+    botao=document.createElement("button");
+    texto=document.createTextNode("Jogar")
+    botao.appendChild(texto);
+    botao.setAttribute("onclick","GeraTab()");
+    tag.appendChild(botao);
+    body=document.querySelector("body");
+    body.appendChild(tag);
+}
+var tab=[], escolhidos=[], posicoes=[], nivel, linhas, resol, colunas=4;
