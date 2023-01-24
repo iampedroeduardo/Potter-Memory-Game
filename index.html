@@ -14,14 +14,16 @@
             
         </tbody>
     </table>
-    <p>Dificuldade</p>
-    <br>
-    <input type="radio" name="dificuldade" value="facil" oninput="GeraTab()">
-    <label>Fácil</label>
-    <input type="radio" name="dificuldade" value="medio" oninput="GeraTab()">
-    <label>Médio</label>
-    <input type="radio" name="dificuldade" value="dificil" oninput="GeraTab()">
-    <label>Difícil</label>
+    <div id="dificuldade">
+        <p>Dificuldade</p>
+        <br>
+        <input type="radio" name="dificuldade" value="facil" oninput="resol='82px';nivel=1;linhas=3;GeraTab()">
+        <label>Fácil</label>
+        <input type="radio" name="dificuldade" value="medio" oninput="resol='82px';nivel=2;linhas=4;GeraTab()">
+        <label>Médio</label>
+        <input type="radio" name="dificuldade" value="dificil" oninput="resol='60px';nivel=3;linhas=6;colunas=6;GeraTab()">
+        <label>Difícil</label>
+    </div>
     <script src="jogodamemoria.js"></script>
 </body>
 </html>
