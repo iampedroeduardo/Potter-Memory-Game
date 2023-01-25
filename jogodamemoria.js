@@ -121,13 +121,39 @@ function GeraPosicoes(){
         }
     }
 }
+function Tempo(){
+    tempo--;
+    crono=document.getElementById("texto")
+    crono.innerHTML=tempo;
+    img= new Image();
+    img.src="Imagens/relogio.png";
+    img.setAttribute("class","relogio");
+    crono.appendChild(img);
+    if(tempo<=tempoinicial/6){
+        crono.style.color="red";
+    }
+    if(tempo==0){
+        clearInterval(meuInterval);
+        TiraOnclick();
+        tela=[
+            '<div class="container">',
+            '    <div class="box">',
+            '        <h1>Sinto muito! Acabou o tempo!</h1>',
+            '        <a href="index.html"><button class="botao">Tentar Novamente</button></a>',
+            '    <div>',
+            '</div>'
+        ]
+        setTimeout(()=>{document.querySelector("body").innerHTML=tela.join("\n")},500);
+    }
+}
 function GeraTab(){
     GeraPosicoes();
     SorteiaTab();
     TirarRadio();
+    meuInterval=setInterval(Tempo,1000)
 }
 function TirarRadio(){
     div=document.getElementById("dificuldade");
     div.parentNode.removeChild(div);
 }
-var tab=[], escolhidos=[], posicoes=[], nivel, linhas, resol, colunas=4, fotos=["harry","rony","hermione","luna","ginny","dumbledore","draco","hagrid","snape","sirius","jameslily","fredgeorge","remus","voldemort","neville","minerva","dobby","tonks"];
+var tab=[], escolhidos=[], posicoes=[], nivel, linhas, resol, colunas=4, fotos=["harry","rony","hermione","luna","ginny","dumbledore","draco","hagrid","snape","sirius","jameslily","fredgeorge","remus","voldemort","neville","minerva","dobby","tonks"], tempo, meuInterval;
