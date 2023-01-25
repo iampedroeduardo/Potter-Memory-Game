@@ -8,7 +8,9 @@
     <title>Jogo da Memória</title>
 </head>
 <body>
-    <h1>Potter Memory Game</h1>
+    <h1 id="titulo">Potter Memory Game   
+        <h1 id="texto"></h1>           
+    </h1>
     <table>
         <tbody id="tabuleiro">
             
@@ -17,11 +19,11 @@
     <div id="dificuldade">
         <p>Dificuldade</p>
         <br>
-        <input type="radio" name="dificuldade" value="facil" oninput="resol='82px';nivel=1;linhas=3;GeraTab()">
+        <input type="radio" name="dificuldade" value="facil" oninput="resol='82px';nivel=1;linhas=3;tempo=30;tempoinicial=tempo;GeraTab()">
         <label>Fácil</label>
-        <input type="radio" name="dificuldade" value="medio" oninput="resol='82px';nivel=2;linhas=4;GeraTab()">
+        <input type="radio" name="dificuldade" value="medio" oninput="resol='82px';nivel=2;linhas=4;tempo=50;tempoinicial=tempo;GeraTab()">
         <label>Médio</label>
-        <input type="radio" name="dificuldade" value="dificil" oninput="resol='60px';nivel=3;linhas=6;colunas=6;GeraTab()">
+        <input type="radio" name="dificuldade" value="dificil" oninput="resol='60px';nivel=3;linhas=6;colunas=6;tempo=140;tempoinicial=tempo;GeraTab()">
         <label>Difícil</label>
     </div>
     <script src="jogodamemoria.js"></script>
