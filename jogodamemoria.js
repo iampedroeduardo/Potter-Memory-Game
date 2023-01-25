@@ -110,7 +110,7 @@ function ColocaOnclick(){
         lin=posicoes[c][0];
         col=posicoes[c][1];
         td=document.getElementById(""+lin+col);
-        on="escolhidos.push(["+lin+","+col+"]);Imagem("+lin+","+col+");if(escolhidos.length%2==0){TiraOnclick();Testa();}"
+        on="escolhidos.push(["+lin+","+col+"]);Imagem("+lin+","+col+");if(escolhidos.length%2==0){TiraOnclick();Testa();"+tent+";}"
         td.setAttribute("onclick",on)
     }
 }
@@ -127,7 +127,7 @@ function Tempo(){
     crono.innerHTML=tempo;
     img= new Image();
     img.src="Imagens/relogio.png";
-    img.setAttribute("class","relogio");
+    img.setAttribute("class","icone");
     crono.appendChild(img);
     if(tempo<=tempoinicial/6){
         crono.style.color="red";
@@ -146,14 +146,95 @@ function Tempo(){
         setTimeout(()=>{document.querySelector("body").innerHTML=tela.join("\n")},500);
     }
 }
+function Tentativas(){
+    texto=document.getElementById("texto")
+    texto.innerHTML=tentativas;
+    img= new Image();
+    img.src="Imagens/cartas.png";
+    img.setAttribute("class","icone");
+    texto.appendChild(img);
+    if(tentativas<=5){
+        texto.style.color="red";
+    }
+    if(tentativas==0 && TestaTudo()==true){
+        TiraOnclick();
+        tela=[
+            '<div class="container">',
+            '    <div class="box">',
+            '        <h1>Sinto muito! Acabaram suas tentativas!</h1>',
+            '        <a href="index.html"><button class="botao">Tentar Novamente</button></a>',
+            '    <div>',
+            '</div>'
+        ]
+        setTimeout(()=>{document.querySelector("body").innerHTML=tela.join("\n")},500);
+    }
+    
+}
 function GeraTab(){
     GeraPosicoes();
     SorteiaTab();
     TirarRadio();
-    meuInterval=setInterval(Tempo,1000)
+    if(modo=="tempo"){
+        meuInterval=setInterval(Tempo,1000)
+    }
+    else if(modo=="tentativas"){
+        Tentativas();
+    }
+}
+function GeraDificuldade(){
+    botao=document.querySelector('input[name="modo"]:checked');
+    tempo=document.getElementById("tempo");
+    tentativas=document.getElementById("tentativas");
+    if(botao.value=="tempo"){
+        on1="resol='82px';nivel=1;linhas=3;tempo=30;tempoinicial=tempo;GeraTab()";
+        on2="resol='82px';nivel=2;linhas=4;tempo=50;tempoinicial=tempo;GeraTab()";
+        on3="resol='60px';nivel=3;linhas=6;colunas=6;tempo=140;tempoinicial=tempo;GeraTab()";
+        modo="tempo";
+    }
+    else if(botao.value=="tentativas"){
+        on1="resol='82px';nivel=1;linhas=3;tentativas=15;GeraTab()";
+        on2="resol='82px';nivel=2;linhas=4;tentativas=25;GeraTab()";
+        on3="resol='60px';nivel=3;linhas=6;colunas=6;tentativas=50;GeraTab()";
+        modo="tentativas";
+        tent="tentativas--;Tentativas();"
+    }
+    div=document.getElementById("escolhas");
+    titulo=document.createElement("p");
+    texto=document.createTextNode("Dificuldade:");
+    titulo.appendChild(texto);
+    div.appendChild(titulo);
+    facil=document.createElement("input");
+    facil.setAttribute("type","radio");
+    facil.setAttribute("oninput",on1);
+    facil.setAttribute("name","dificuldade");
+    label=document.createElement("label");
+    texto=document.createTextNode("Fácil");
+    label.appendChild(texto);
+    div.appendChild(facil);
+    div.appendChild(label);
+    medio=document.createElement("input");
+    medio.setAttribute("type","radio");
+    medio.setAttribute("oninput",on2);
+    medio.setAttribute("name","dificuldade");
+    label=document.createElement("label");
+    texto=document.createTextNode("Médio");
+    label.appendChild(texto);
+    div.appendChild(medio);
+    div.appendChild(label);
+    dificil=document.createElement("input");
+    dificil.setAttribute("type","radio");
+    dificil.setAttribute("oninput",on3);
+    dificil.setAttribute("name","dificuldade");
+    label=document.createElement("label");
+    texto=document.createTextNode("Difícil");
+    label.appendChild(texto);
+    div.appendChild(dificil);
+    div.appendChild(label);
+    tempo.removeAttribute("oninput");
+    tentativas.removeAttribute("oninput");
 }
 function TirarRadio(){
-    div=document.getElementById("dificuldade");
+    div=document.getElementById("escolhas");
     div.parentNode.removeChild(div);
 }
-var tab=[], escolhidos=[], posicoes=[], nivel, linhas, resol, colunas=4, fotos=["harry","rony","hermione","luna","ginny","dumbledore","draco","hagrid","snape","sirius","jameslily","fredgeorge","remus","voldemort","neville","minerva","dobby","tonks"], tempo, meuInterval;
+var tab=[], escolhidos=[], posicoes=[], nivel, linhas, resol, colunas=4, fotos=["harry","rony","hermione","luna","ginny","dumbledore","draco","hagrid","snape","sirius","jameslily","fredgeorge","remus","voldemort","neville","minerva","dobby","tonks"], tempo, meuInterval, tentativas, modo, tent="";
