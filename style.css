@@ -28,3 +28,19 @@ table{
     border-radius: 5px;
     padding: 5px;
 }
+.relogio{
+    justify-content: end;
+    width: 25px;
+    height: 25px;
+}
+#titulo{
+    border-bottom-style: inset;
+}
+.botao{
+    background: -webkit-linear-gradient(bottom, #46FFB9, #46FED7 80%);
+    width: 200px;
+    height: 40px;
+    border-radius: 30px;
+    border: 0px;
+    cursor: pointer;
+}
